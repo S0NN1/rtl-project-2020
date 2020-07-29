@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Sat Jul 25 16:06:03 2020
+# Process ID: 4008
+# Current directory: C:/Users/Sonny/Desktop/projects/rtl-project-2020/src
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent1900 C:\Users\Sonny\Desktop\projects\rtl-project-2020\src\rtl-project.xpr
+# Log file: C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/vivado.log
+# Journal file: C:/Users/Sonny/Desktop/projects/rtl-project-2020/src\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/rtl-project.xpr
+remove_files  C:/Users/Sonny/Desktop/projects/rtl-project-2020/Desktop/10569180.vhd
+file mkdir C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/rtl-project.srcs/sources_1/new
+close [ open C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/rtl-project.srcs/sources_1/new/10569180.vhd w ]
+add_files C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/rtl-project.srcs/sources_1/new/10569180.vhd
+launch_simulation
+source project_reti_logiche.tcl
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+import_files -fileset sim_1 -norecurse {C:/Users/Sonny/Desktop/projects/rtl-project-2020/testbench/tb_pfrl_2020_in_wz.vhd C:/Users/Sonny/Desktop/projects/rtl-project-2020/testbench/tb_pfrl_2020_no_wz.vhd}
+add_bp {C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/rtl-project.srcs/sources_1/new/10569180.vhd} 59
+remove_bps -file {C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/rtl-project.srcs/sources_1/new/10569180.vhd} -line 59
+config_webtalk -user on
+close_sim

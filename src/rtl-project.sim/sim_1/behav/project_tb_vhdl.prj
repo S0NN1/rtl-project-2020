@@ -1,0 +1,5 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "../../../rtl-project.srcs/sim_1/imports/testbench/tb_pfrl_2020_in_wz.vhd"
+
+# Do not sort compile order
+nosort

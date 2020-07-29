@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Tue Jul 28 21:49:22 2020
+# Process ID: 11444
+# Current directory: C:/Users/Sonny/Desktop/projects/rtl-project-2020/src
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent12248 C:\Users\Sonny\Desktop\projects\rtl-project-2020\src\rtl-project.xpr
+# Log file: C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/vivado.log
+# Journal file: C:/Users/Sonny/Desktop/projects/rtl-project-2020/src\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Sonny/Desktop/projects/rtl-project-2020/src/rtl-project.xpr

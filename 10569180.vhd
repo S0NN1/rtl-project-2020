@@ -49,7 +49,7 @@ architecture behavioral of project_reti_logiche is
 	signal wz_bit                    : std_logic;                    --working zone bit
 	signal offset                    : std_logic_vector(3 downto 0); --working zone offset
 	signal data                      : std_logic_vector(6 downto 0); --data requested
-	signal counter, next_counter     : integer range 0 to 7;                      --first read 
+	signal counter, next_counter     : integer range 0 to 7;         --first read 
 	signal current_data              : std_logic_vector(6 downto 0);
 
 begin
@@ -70,8 +70,8 @@ begin
 		o_done       <= '0';
 		o_address    <= "0000000000000000";
 		o_data       <= "00000000";
-		wz_bit       <= '0';          --new
-		offset       <= "0000";           -- NEW
+		wz_bit       <= '0';    --new
+		offset       <= "0000"; -- NEW
 		case current_state is
 			when reset =>
 				if i_start = '0' then
@@ -116,7 +116,7 @@ begin
 				end loop;
 				if counter /= 7 then
 					if wz_bit = '1' then
-						o_data     <= wz_bit & std_logic_vector(to_unsigned(counter, 3)) & offset; 
+						o_data     <= wz_bit & std_logic_vector(to_unsigned(counter, 3)) & offset;
 						o_address  <= "0000000000001001";
 						o_en       <= '1';
 						o_we       <= '1';
@@ -157,4 +157,4 @@ begin
 				end if;
 		end case;
 	end process;
-end behavioral; 
+end behavioral;

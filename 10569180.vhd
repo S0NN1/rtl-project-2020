@@ -49,7 +49,7 @@ architecture behavioral of project_reti_logiche is
 	signal wz_bit                    : std_logic;                    --working zone bit
 	signal offset                    : std_logic_vector(3 downto 0); --working zone offset
 	signal data                      : std_logic_vector(6 downto 0); --data requested
-	signal counter, next_counter     : integer;                      --first read 
+	signal counter, next_counter     : integer range 0 to 7;                      --first read 
 	signal current_data              : std_logic_vector(6 downto 0);
 
 begin
@@ -157,4 +157,4 @@ begin
 				end if;
 		end case;
 	end process;
-end behavioral;
+end behavioral; 

@@ -1,21 +1,13 @@
 ----------------------------------------------------------------------------------
--- company: 
--- engineer: 
+-- company: Polimi
+-- engineer: Nicolò Sonnino
 -- 
 -- create date: 04/17/2020 05:05:22 pm
--- design name: 
+-- design name: RTL Project
 -- module name: 10569180 - behavioral
--- project name: 
--- target devices: 
--- tool versions: 
--- description: 
--- 
--- dependencies: 
--- 
--- revision:
--- revision 0.01 - file created
--- additional comments:
--- 
+-- project name: RTL Project
+-- target devices: FF, LUT
+-- tool versions: 2020.1
 ----------------------------------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
@@ -49,17 +41,17 @@ architecture behavioral of project_reti_logiche is
 	signal wz_bit                    : std_logic;                    --working zone bit
 	signal offset                    : std_logic_vector(3 downto 0); --working zone offset
 	signal data                      : std_logic_vector(6 downto 0); --data requested
-	signal counter, next_counter     : integer range 0 to 7;         --first read 
-	signal current_data              : std_logic_vector(6 downto 0);
+	signal counter, next_counter     : integer range 0 to 2;         --address counters
+	signal current_data              : std_logic_vector(6 downto 0); --data register
 
 begin
 	process (i_clk, i_rst)
 	begin
-		if i_rst = '1' then --if reset signal is high return to reset state
+		if i_rst = '1' then
 			current_state <= reset;
 		elsif rising_edge(i_clk) then
 			counter       <= next_counter;
-			current_state <= next_state; --next FSM state
+			current_state <= next_state;
 		end if;
 	end process;
 	process (current_state, i_start, i_data, data, offset, wz_bit, counter, current_data)
@@ -70,8 +62,8 @@ begin
 		o_done       <= '0';
 		o_address    <= "0000000000000000";
 		o_data       <= "00000000";
-		wz_bit       <= '0';    --new
-		offset       <= "0000"; -- NEW
+		wz_bit       <= '0';
+		offset       <= "0000";
 		case current_state is
 			when reset =>
 				if i_start = '0' then

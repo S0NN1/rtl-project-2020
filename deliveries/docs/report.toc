@@ -1,15 +1,16 @@
 \babel@toc {italian}{}
 \babel@toc {italian}{}
-\contentsline {section}{\numberline {1}Specifiche}{2}%
-\contentsline {subsection}{\numberline {1.1}Descrizione}{2}%
-\contentsline {subsection}{\numberline {1.2}WZE (Working Zone Encoding)}{2}%
-\contentsline {subsection}{\numberline {1.3}Esempi}{3}%
-\contentsline {section}{\numberline {2}Architettura}{4}%
-\contentsline {section}{\numberline {3}Risulati Sperimentali}{5}%
-\contentsline {subsection}{\numberline {3.1}Sintesi}{5}%
-\contentsline {subsection}{\numberline {3.2}Simulation}{6}%
-\contentsline {subsection}{\numberline {3.3}Schematic}{7}%
-\contentsline {section}{\numberline {4}Test Benches}{8}%
-\contentsline {subsection}{\numberline {4.1}\textbf {tb\_pfrl\_2020\_in\_wz}}{8}%
-\contentsline {subsection}{\numberline {4.2}\textbf {tb\_pfrl\_2020\_no\_wz}}{8}%
-\contentsline {section}{\numberline {5}Conclusioni}{8}%
+\contentsline {section}{\numberline {1}Specifiche}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Descrizione}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}WZE (Working Zone Encoding)}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Esempi}{3}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Architettura}{4}{section.2}%
+\contentsline {section}{\numberline {3}Risulati Sperimentali}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Sintesi}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Simulation}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Schematic}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Test Benches}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}\textbf {tb\_pfrl\_2020\_in\_wz}}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}\textbf {tb\_pfrl\_2020\_no\_wz}}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}\textbf {tb\_casi\_limite}}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Conclusioni}{8}{section.5}%

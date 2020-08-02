@@ -5,14 +5,32 @@
 \usepackage{tocloft}
 \usepackage{subcaption}
 \usepackage{caption}
+\usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{listings}
 \usepackage{wrapfig}
 \usepackage{pdfpages}
 \usepackage{pdflscape}
+\usepackage{scrlayer}
+\usepackage{scrhack}
 \renewcommand{\cftsecdotsep}{2}
 \renewcommand{\cftsubsecdotsep}{2}
 \renewcommand*{\thefootnote}{(\arabic{footnote})}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\DeclareNewLayer[
+background,
+textarea,
+addwidth=\footskip,
+addwidth=\footheight,
+contents=\hfill
+\rotatebox{90}{\parbox{\layerheight}{\centering\pagemark}}]{lscape.foot}
+\DeclareNewPageStyleByLayers{lscape}{lscape.foot}
 \graphicspath{{images/}}
 \begin{document}
 \begin{titlepage}
@@ -53,14 +71,14 @@ L'offset \textbf{one-hot} associa all'unico 1 il valore da rappresentare nel seg
 \begin{figure}[!htb]
     \centering
     \begin{minipage}[b]{1\textwidth}
-        \includegraphics[width=\textwidth]{WZ_IN@2x.png}
+        \includegraphics[scale=0.21]{WZ_IN.png}
         \captionsetup{justification=centering}
         \caption{Valore contenuto in posizione 2}\label{WZ_IN}
     \end{minipage}
     \hfill
-    \vspace{1cm}
+    \vspace{0.2cm}
     \begin{minipage}[b]{1\textwidth}
-        \includegraphics[width=\textwidth]{WZ_OUT@2x.png}
+        \includegraphics[scale=0.21]{WZ_OUT.png}
         \captionsetup{justification=centering}
         \caption{Valore non contenuto in nessuna working zone}\label{WZ_OUT}
     \end{minipage}
@@ -79,7 +97,7 @@ Di seguito viene mostrata la FSM (Final State Machine) in versione semplificata,
     \end{wrapfigure}
     \item \textbf{reset}: stato di inizializzazione, se il segnale \textbf{i\_rst} viene alzato si ritorna a questo stato. Fintanto che \textbf{i\_start} rimane basso si ritorna a reset, se viene alzato si passa a start.
     \item \textbf{start}: stato di preparazione, i segnali \textbf{o\_we, wz\_bit} vengono abbassati, l'\textbf{offset} viene posto a 0000; per permettere la lettura dell'indirizzo in posizione 8, \textbf{o\_en} viene alzato a 1 e si assegna 0000000000001000 a \textbf{o\_address}.
-    \item \textbf{store\_data}: stato di memorizzazione del valore da codificare, \textbf{i\_data} letto precedentemente viene salvato nel registro \textbf{data} e viene inizializzato il valore \textbf{next\_counter},responsabile di iterare gli indirizzi di memoria.
+    \item \textbf{store\_data}: stato di memorizzazione del valore da codificare, \textbf{i\_data} letto precedentemente viene salvato nel registro \textbf{data} e viene inizializzato il valore \textbf{next\_counter}, responsabile di iterare gli indirizzi di memoria.
           }
     \item \textbf{save\_data}: stato di salvataggio, il valore di \textbf{i\_data} viene salvato per essere utilizzato per confrontarlo successivamente.
     \item \textbf{compare\_data}: stato di confronto dei valori, attraverso un contatore interno allo stato si confronta il valore di \textbf{data} con \textbf{current\_data} con sommato il contatore; se risultano uguali viene abilitata la scrittura tramite l'assegnazione di \textbf{o\_en} e \textbf{o\_we} a 1 e \textbf{o\_address} viene posto a 9, infine \textbf{o\_data} viene codificato come discusso nelle specifiche e \textbf{o\_done} viene alzato a 1. Nel caso in cui non appartenga alla working zone, se non è al ottavo indirizzo, il contatore viene incrementato e si ritorna allo stato precedente, altrimenti viene abilitata la scrittura  del valore codificato  e si alza \textbf{o\_done}.
@@ -140,18 +158,26 @@ Il progetto è stato testato sulla versione di \textbf{Vivado 2016.4}, utilizzan
     \end{center}
 \end{figure}
 \begin{landscape}
-    \includepdf[landscape=true, angle= -90, pagecommand=\subsection{Schematic}]{schematic.pdf}
+    \includepdf[landscape=true, angle= -90,pagecommand=\subsection{Schematic}\thispagestyle{lscape}]{schematic.pdf}
 \end{landscape}
 \section{Test Benches}
 \subsection{\textbf{tb\_pfrl\_2020\_in\_wz}}
 In questo test bench si vuole verificare la correttezza del progetto nel caso di un valore appartenente a una working zone, in particolare il valore da codificare è 33.
 La posizione 3 di memoria ha il valore 31, quindi l'output corretto per passare questo testbench è 1 (WZ\_BIT) \& 011 (WZ\_NUM) \& 0100(OFFSET).
-Il testbench risulta passato con n cicli di clock da n ns.
 \subsection{\textbf{tb\_pfrl\_2020\_no\_wz}}
 Lo scopo di questo test bench è verificare che nel caso di un valore non appartenente a una working zone, l'output risulti corretto.
-Poichè il valore da codificare è 42 e la working zone più vicina ad esso è 37,quindi non esiste 0\(\leq\)offset\(\leq\) 3 tale da raggiungere il valore, l'output risulta 0 (WZ\_BIT) \& 0101010 (42).
-Il testbench risulta passato con n cicli di clock da n ns.
+Poichè il valore da codificare è 42 e la working zone più vicina ad esso è 37, quindi non esiste 0\(\leq\)offset\(\leq\) 3 tale da raggiungere il valore, l'output risulta 0 (WZ\_BIT) \& 0101010 (42).
+\subsection{\textbf{tb\_casi\_limite}}
+Sono stati testati i casi limite quali:
+\begin{itemize}
+    \item valore vicino a una working zone per un offset negativo;
+    \item valore appartenente alla prima working zone;
+    \item valore appartenente all'ultima working zone;
+    \item multipli segnali di reset;
+    \item attesa di segnale o\_done \(=\) 0.
+\end{itemize}
+Per tutti questi casi il progetto ha ottenuto risultati positivi.
 \section{Conclusioni}
-Dai risultati sperimentali e dalla sintesi si può notare che si sia studiata la codifica working zone con offset one-hot nella sua interezza.
+Dai risultati sperimentali e dalla sintesi si può notare che si ha studiato la codifica working zone con offset one-hot nella sua interezza: testando casi limite, superando le due test benches forniteci, sintetizzando il progetto e analizzandone i risultati.
 Una possibile ottimizzazione potrebbe essere gestire il valore di o\_data ad ogni stato con un registro apposito per evitare di avere valori undefined, anche quando non ci interessa osservarlo, e quindi abbassare il numero di LUT ed eliminare un inferring latch.
 \end{document}

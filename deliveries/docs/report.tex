@@ -103,7 +103,7 @@ Di seguito viene mostrata la FSM (Final State Machine) in versione semplificata,
     \item \textbf{compare\_data}: stato di confronto dei valori, attraverso un contatore interno allo stato si confronta il valore di \textbf{data} con \textbf{current\_data} con sommato il contatore; se risultano uguali viene abilitata la scrittura tramite l'assegnazione di \textbf{o\_en} e \textbf{o\_we} a 1 e \textbf{o\_address} viene posto a 9, infine \textbf{o\_data} viene codificato come discusso nelle specifiche e \textbf{o\_done} viene alzato a 1. Nel caso in cui non appartenga alla working zone, se non è al ottavo indirizzo, il contatore viene incrementato e si ritorna allo stato precedente, altrimenti viene abilitata la scrittura  del valore codificato  e si alza \textbf{o\_done}.
     \item \textbf{wait\_confirm}: stato di attesa, se allo stato precendente è stato alzato \textbf{o\_done} si arriva a quest'ultimo; vengono quindi azzerati i segnali di scrittura e lettura, \textbf{o\_done} rimane alzato fino a quando non viene ricevuto un segnale \textbf{i\_start} = 0 e allora in quel caso \textbf{o\_done} viene abbassato e si ritorna a reset.
 \end{itemize}
-\section{Risulati Sperimentali}
+\section{Risultati Sperimentali}
 \subsection{Sintesi}
 Il progetto è stato testato sulla versione di \textbf{Vivado 2016.4}, utilizzando come FPGA target \textbf{xc7a200tfbg484-1}, e ha generato il seguente report di sintesi:\\
 \\
